@@ -1,14 +1,14 @@
 <?php
 
-$addons_fileupload = true;
+$q_fileupload = true;
 
 $q = @$_REQUEST['q'];
 
 switch ($q) {
 	case 'fileupload':
 		
-		if ( addon_fileupload = true ) {
-			include('addons/fileupload.php')
+		if ( $q_fileupload = true ) {
+			include('api/q/fileupload.php')
 		}
 
 		break;
