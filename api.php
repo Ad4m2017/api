@@ -19,7 +19,7 @@ function init_parameters( $string ) {
 	}
 }
 init_parameters('query:q,w:w,s:e,wo,e');
-echo $query; 
+echo $query;
 echo $w;
 echo $s;
 echo $e;
