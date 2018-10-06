@@ -1,4 +1,5 @@
-$( '#send' ).on( 'click', function() {
+$( '#btn_fileupload_send' ).on( 'click', function() {
+
     var file = $('#fileupload').get(0).files[0], formData = new FormData();
 
     formData.append( 'file', file );
@@ -19,7 +20,7 @@ $( '#send' ).on( 'click', function() {
             else {
                 jqXHR = new window.XMLHttpRequest();
             }
-            
+
             //Upload progress
             jqXHR.upload.addEventListener( "progress", function ( evt ) {
                 if ( evt.lengthComputable ) {
@@ -48,13 +49,13 @@ $( '#send' ).on( 'click', function() {
         {
             console.log( 'Completed.' );
             alert(data);
-            //alert(JSON.stringify(data));
+            alert(JSON.stringify(data));
         },
         error       : function ( data )
         {
             console.log( 'error.' );
             alert('Error, are you Offline ?');
-            //alert(JSON.stringify(data));
+            alert(JSON.stringify(data));
         }
     } );
 });

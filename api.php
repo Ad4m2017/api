@@ -4,9 +4,6 @@
 $fileupload = true;
 
 init_param('q');
-if ( $q !== '' && $q !== 'javascript.js' && $q !== 'style.css' ) {
-	header('Content-Type: application/json');
-}
 
 /* $output is an array for the json output */
 $output = array();
@@ -17,21 +14,26 @@ switch ($q) {
 		include('api/js/respond.min.js');
 		include('api/js/jquery-1.12.4.min.js');
 		echo '$(document).ready(function() {';
-		if ( $fileupload = true ) { $file = 'api/js/fileupload.js'; if ( file_exists( $file ) ) { include( $file ); } }
+		if ( $fileupload == true ) { $file = 'api/js/fileupload.js'; if ( file_exists( $file ) ) { include( $file ); } }
 		echo '});';
 		break;
 	case 'style.css':
 		header('Content-type: text/css');
 		include('api/css/normalize.min.css');
-		if ( $fileupload = true ) { $filename = 'api/css/fileupload.css'; if ( file_exists( $file ) ) { include( $file ); } }
+		if ( $fileupload == true ) { $filename = 'api/css/fileupload.css'; if ( file_exists( $file ) ) { include( $file ); } }
 		break;		
 	case 'fileupload':
-		if ( $fileupload = true ) {
-			include('api/fileupload.php');
-		}
+		header('Content-Type: application/json');
+		$output['status'] = 'ok';
+		$output['status_text'] = 'test';
+		//echo json_encode( $output );
+		if ( $fileupload == true ) { include('api/fileupload.php');	}
 		break;
 	default:
-		# code...
+		header('Content-Type: application/json');
+		$output['status'] = '';
+		$output['status_text'] = '';
+		echo json_encode( $output );
 		break;
 }
 
