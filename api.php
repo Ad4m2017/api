@@ -5,6 +5,11 @@ header('Content-Type: application/json');
 /* api-options true and false for add and remove the option */
 $fileupload = true;
 
+/* $output is an array for the json output */
+$output = array();
+
+var_dump($_FILES);
+
 init_param('q');
 switch ($q) {
 	case 'fileupload':
