@@ -1,6 +1,6 @@
 <?php
 
-header('Content-Type: application/json');
+//header('Content-Type: application/json');
 
 /* api-options true and false for add and remove the option */
 $fileupload = true;
@@ -8,12 +8,23 @@ $fileupload = true;
 /* $output is an array for the json output */
 $output = array();
 
-var_dump($_FILES);
-
 init_param('q');
 switch ($q) {
+	case 'javascript.js':
+		include('api/js/respond.min.js');
+		include('api/js/jquery-1.12.4.min.js');
+		echo '$(document).ready(function() {';
+		if ( $fileupload = true ) { $filename = 'fileupload.js'; if (file_exists($filename)) { include('api/js/' . $filename ); } }
+		echo '});';
+		break;
+	case 'style.css':
+		include('api/css/normalize.min.css');
+		if ( $fileupload = true ) { $filename = 'fileupload.css'; if (file_exists($filename)) { include('api/css/' . $filename ); } }
+		break;		
 	case 'fileupload':
 		
+		var_dump($_FILES);
+
 		if ( $fileupload = true ) {
 			include('api/fileupload.php');
 		}
