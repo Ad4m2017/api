@@ -43,8 +43,7 @@ function save_file( $filesize_limit = 20*KB , $only_images = true , $save_to = '
 		$img_array = @getimagesize( $_FILES['file']['tmp_name'] );
 		//var_dump($img_array);
 		/*
-			Array (	[0] => 800 	[1] => 450 	[2] => 2 	[3] => width="800" height="450"
-			[bits] => 8
+			Array (	[0] => 800 	[1] => 450 	[2] => 2 	[3] => width="800" height="450" 	[bits] => 8
 			[channels] => 3
 			[mime] => image/jpeg)
 		*/
