@@ -19,7 +19,7 @@ function save_file( $filesize_limit = 20*KB , $only_images = true , $save_to = '
 	if ( 0 < @$_FILES['file']['error'] ) {
 	    $output['status'] 		= 'error';
 	    $output['status_text'] 	= $_FILES['file']['error'];
-		echo json_encode( $output );
+		return json_encode( $output );
 	}
 	
 	if ( $_FILES['file']['size'] > $filesize_limit ) {
@@ -36,11 +36,11 @@ function save_file( $filesize_limit = 20*KB , $only_images = true , $save_to = '
 	    else {
 		    $output['status_text'] 	= 'File is to big. Maximum filesize is ' . number_format( $filesize_limit / KB , 2 , '.' , '' ) . ' KB.';
 	    }
-		echo json_encode( $output );
+		return json_encode( $output );
 	}
 
-	$img_array = @getimagesize( $_FILES['file']['tmp_name'] );
-	if ( $only_images == true AND $img_array['mime'] !== 'image/gif' AND $img_array['mime'] !== 'image/jpeg' AND $img_array['mime'] !== 'image/png') {
+	if ( $only_images == true ) {
+		$img_array = @getimagesize( $_FILES['file']['tmp_name'] );
 		//var_dump($img_array);
 		/*
 			Array (
@@ -52,9 +52,11 @@ function save_file( $filesize_limit = 20*KB , $only_images = true , $save_to = '
 			[channels] => 3
 			[mime] => image/jpeg)
 		*/
-	    $output['status'] 		= 'error';
-	    $output['status_text'] 	= 'File is not an image. Allowed images: *.gif, *.jpg and *.png.';
-		echo json_encode( $output );
+		if ( $img_array['mime'] !== 'image/gif' AND $img_array['mime'] !== 'image/jpeg' AND $img_array['mime'] !== 'image/png' ) {
+		    $output['status'] 		= 'error';
+		    $output['status_text'] 	= 'File is not an image. Allowed images: *.gif, *.jpg and *.png.';
+			echo json_encode( $output );
+		}
 	}
 
     //var_dump($_FILES['file']);
