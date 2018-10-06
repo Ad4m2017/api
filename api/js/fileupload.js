@@ -49,6 +49,7 @@ $( '#btn_fileupload_send' ).on( 'click', function() {
         {
             console.log( 'Completed.' );
             alert(data);
+            alert(data.status);
             alert(JSON.stringify(data));
         },
         error       : function ( data )
