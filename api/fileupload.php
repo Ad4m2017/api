@@ -9,10 +9,13 @@
 	//check settings with:
 		phpinfo();
 */
+
 define('KB', 1024);
 define('MB', 1048576);
 define('GB', 1073741824);
 define('TB', 1099511627776);
+
+if ( count($_FILES) !== 1 ) { $output['status'] = 'error'; $output['status_text'] = ''; echo json_encode( $output ); }
 
 function save_file( $filesize_limit = 20*KB , $only_images = true , $save_to = 'mysql:db_api,tbl_files,name' , $save_as = 'base64' ) {
 	

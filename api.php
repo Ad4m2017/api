@@ -1,34 +1,34 @@
 <?php
 
-//header('Content-Type: application/json');
-
 /* api-options true and false for add and remove the option */
 $fileupload = true;
+
+init_param('q');
+if ( $q !== '' && $q !== 'javascript.js' && $q !== 'style.css' ) {
+	header('Content-Type: application/json');
+}
 
 /* $output is an array for the json output */
 $output = array();
 
-init_param('q');
 switch ($q) {
 	case 'javascript.js':
+		header('Content-type: text/javascript');
 		include('api/js/respond.min.js');
 		include('api/js/jquery-1.12.4.min.js');
 		echo '$(document).ready(function() {';
-		if ( $fileupload = true ) { $filename = 'fileupload.js'; if (file_exists($filename)) { include('api/js/' . $filename ); } }
+		if ( $fileupload = true ) { $file = 'api/js/fileupload.js'; if ( file_exists( $file ) ) { include( $file ); } }
 		echo '});';
 		break;
 	case 'style.css':
+		header('Content-type: text/css');
 		include('api/css/normalize.min.css');
-		if ( $fileupload = true ) { $filename = 'fileupload.css'; if (file_exists($filename)) { include('api/css/' . $filename ); } }
+		if ( $fileupload = true ) { $filename = 'api/css/fileupload.css'; if ( file_exists( $file ) ) { include( $file ); } }
 		break;		
 	case 'fileupload':
-		
-		var_dump($_FILES);
-
 		if ( $fileupload = true ) {
 			include('api/fileupload.php');
 		}
-
 		break;
 	default:
 		# code...
@@ -69,7 +69,7 @@ function init_param( $string ) {
 		} else {
 			$key 	= substr( $key_value , 0 , $pos );
 			$value 	= substr( $key_value , $pos + 1 );
-			$GLOBALS[$key] = @$_REQUEST[$value];			
+			$GLOBALS[$key] = trim( @$_REQUEST[ $value ] );
 		}
 	}
 }
