@@ -43,11 +43,7 @@ function save_file( $filesize_limit = 20*KB , $only_images = true , $save_to = '
 		$img_array = @getimagesize( $_FILES['file']['tmp_name'] );
 		//var_dump($img_array);
 		/*
-			Array (
-			[0] => 800
-			[1] => 450
-			[2] => 2
-			[3] => width="800" height="450"
+			Array (	[0] => 800 	[1] => 450 	[2] => 2 	[3] => width="800" height="450"
 			[bits] => 8
 			[channels] => 3
 			[mime] => image/jpeg)
@@ -55,7 +51,7 @@ function save_file( $filesize_limit = 20*KB , $only_images = true , $save_to = '
 		if ( $img_array['mime'] !== 'image/gif' AND $img_array['mime'] !== 'image/jpeg' AND $img_array['mime'] !== 'image/png' ) {
 		    $output['status'] 		= 'error';
 		    $output['status_text'] 	= 'File is not an image. Allowed images: *.gif, *.jpg and *.png.';
-			echo json_encode( $output );
+			return json_encode( $output );
 		}
 	}
 
