@@ -24,6 +24,18 @@ switch ($q) {
 		break;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* 
 	function to get easy and quick parameter(s) with one line code
 	samples:
@@ -50,4 +62,6 @@ function init_param( $string ) {
 		}
 	}
 }
+
+
 ?>
